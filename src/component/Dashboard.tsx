@@ -46,7 +46,7 @@ const Dashboard = () => {
               key={form.id}
               className="col-span-1 flex-col rounded-md bg-white p-3 shadow-sm"
             >
-              <Link href={`/form?formId=${form.id}`}>
+              <Link href={`/form/${form.id}`}>
                 <div className="flex flex-shrink-0 items-center rounded-l-md text-sm font-medium text-black">
                   {form.title}
                 </div>
@@ -54,10 +54,15 @@ const Dashboard = () => {
             </li>
           ))
         ) : (
-          <div className=" h-full w-full items-center justify-center ">
-            <div>No forms available</div>
-          </div>
+          <></>
         )}
+        {/* <li>
+          <Link href={"/form/new"}>
+            <div className="flex flex-shrink-0 items-center rounded-l-md text-sm font-medium text-black">
+              <EllipsisVerticalIcon className="h-5 w-5 text-gray-400" />
+            </div>
+          </Link>
+        </li> */}
       </ul>
     </div>
   );

@@ -12,9 +12,11 @@ import { api } from "@/utils/api";
 import { Question, Option, Answer, AnswersState } from "@/utils/Interfaces";
 import moment from "moment";
 
-const FormPage = () => {
-  const router = useRouter();
-  const formId = router.query.formId as string;
+const FormPage = ({
+  formId,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  // const router = useRouter();
+  // const formId = router.query.formId as string;
 
   const { data, isLoading, isError, error } = api.form.getFormById.useQuery({
     id: formId,
@@ -451,7 +453,7 @@ const FormPage = () => {
 };
 
 export const getServerSideProps = (async (context) => {
-  const formId = context.query.formId;
+  const formId = context.params?.formId;
 
   if (typeof formId !== "string") {
     throw new Error("Invalid form ID");

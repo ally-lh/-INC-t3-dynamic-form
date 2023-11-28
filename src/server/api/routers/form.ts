@@ -55,6 +55,35 @@ export const formRouter = createTRPCRouter({
 
       return form; // Return the form with its questions, answers, and options
     }),
+  createForm: protectedProcedure
+    .input(
+      z.object({
+        title: z.string(),
+        description: z.string().optional().nullable(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { title, description } = input;
+
+      // Create a new form
+      const newForm = await ctx.db.form.create({
+        data: {
+          title: title,
+          description: description,
+          userId: ctx.session.user.id,
+        },
+      });
+      const defaultQuestion = await ctx.db.question.create({
+        data: {
+          questionText: "Untitled Question",
+          questionType: "text",
+          isRequired: false,
+          formId: newForm.id,
+        },
+      });
+
+      return newForm.id;
+    }),
 
   updateForm: protectedProcedure
     .input(

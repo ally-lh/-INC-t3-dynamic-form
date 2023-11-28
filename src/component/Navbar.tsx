@@ -2,6 +2,7 @@ import { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -15,9 +16,9 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white">
+    <header className="border-b-2 border-slate-200 bg-white">
       <nav
-        className="flex items-center justify-between p-6 lg:px-8"
+        className="flex items-center justify-between px-10 py-3"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
@@ -41,15 +42,11 @@ export default function Navbar() {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              {item.name}
-            </a>
-          ))}
+          <Link href="/">
+            <div className="text-sm font-semibold leading-6 text-gray-900">
+              Dashboard
+            </div>
+          </Link>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <button
